@@ -1,0 +1,60 @@
+package aplicattion;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+
+import entities.Employe;
+
+
+public class Program {
+	
+
+	public static void main(String[] args) {
+
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		int empregados;
+		
+		List<Employe> employee = new ArrayList<>();
+		
+		System.out.print("Quantos empregados você tem? ");
+		empregados = sc.nextInt();
+		
+		for(int i = 0; i < empregados; i++) {
+			System.out.println("\nEm se tratando do empregado #" + i + ":\n");
+			System.out.print("Qual o id do empregado? ");
+			int id = sc.nextInt();
+			System.out.print("Qual o nome do empregado? ");
+			sc.nextLine();
+			String nome = sc.nextLine();
+			System.out.print("Qual o salário do empregado? ");
+			double sal = sc.nextDouble();
+			employee.add( new Employe(id, nome, sal));
+		}
+		
+		System.out.print("\nQual o id do empregado que queres dar aumento? ");
+		int id = sc.nextInt();
+		
+		Employe emp = employee.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+		if(emp == null) {
+			System.out.print("No existe este id meu caro!");
+		}else {
+			System.out.print("Qual a porcentagem que tu queres aumentar no salário deste empregado? ");
+			double percentage = sc.nextDouble();
+			emp.increaseSalary(percentage);
+		}
+		
+		System.out.println("\nLista dos empregados:");
+		for(Employe x: employee) {
+			System.out.println(x);
+		}
+		
+		sc.close();
+				
+	}
+
+}

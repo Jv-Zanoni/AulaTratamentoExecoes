@@ -1,0 +1,5 @@
+package entitesenum;
+
+public class OrderStatus {
+
+}
